@@ -101,6 +101,7 @@ Good luck!
 
 void start_program();
 char prompt_user();
+void select_action(const char &prompt,std::vector<int> &list);
 
 int main() {
     
@@ -116,82 +117,7 @@ void start_program() {
     char prompt {};
     do {
         prompt = prompt_user();
-
-        switch (prompt){
-            case 'p': //intentional to achieve p OR P
-            case 'P':
-                // case p or P - print
-                if (!list.empty()){
-                    std::cout << "[ ";
-                    for (auto element: list)
-                        std::cout << element << " ";
-                    std::cout << "]" << std::endl;
-                } else
-                    std::cout << "[] - the list is empty" << std::endl;
-                break;
-            case 'a': 
-            case 'A':{ //brackets needed to declare the scope for the number variable    
-                // case a or A - add
-                std::cout << "Provide a number: ";
-                int number {};
-                std::cin >> number;
-                list.push_back(number);
-                std::cout << number << " added" << std::endl;
-                break;
-            } 
-            case 'm': 
-            case 'M':{
-                // case m or M - mean
-                if (!list.empty()){
-                    int running_sum {};
-                    for (auto element: list)
-                        running_sum += element;
-                    // std::cout << std::fixed << std::setprecision(2); //Optional to set the precion of the output
-                    std::cout << static_cast<double>(running_sum) / list.size() << std::endl; // (double) / (int) = (double)
-                } else
-                    std::cout << "Unable to calculate the mean - no data" << std::endl;
-                break;
-            }
-            case 's': 
-            case 'S':{
-                // case s or S - smallest
-                if (!list.empty()){
-                    int smallest {INT_MAX};
-                    int index {};
-                    int i {};
-                    for (auto element: list){
-                        index = (element < smallest)?i:index; // if element is smaller then assign new index else keep the old one
-                        smallest = (element < smallest)?element:smallest;
-                        ++i;
-                    }
-                    std::cout << smallest << " at [" << index << "]" << std::endl;
-                } else
-                    std::cout << "Unable to determine the smallest number - list is empty" << std::endl;
-                break;
-            }
-            case 'l': 
-            case 'L':
-                // case l or L - largest
-                if (!list.empty()){
-                    int largest {}, index {}, i{};
-                    for (auto element: list){
-                        index = (element > largest)?i:index;
-                        largest = (element > largest)?element:largest;
-                        ++i;
-                    }
-                    std::cout << largest << " at [" << index << "]" << std::endl;
-                } else
-                    std::cout << "Unable to determine the largest number - list is empty" << std::endl;
-                break;
-            case 'q': 
-            case 'Q':
-                // case q or Q - quit
-                std::cout << "Goodbye" << std::endl;
-                break;
-            default:
-                std::cout << "Unknown selection, please try again" << std::endl;
-        }
-
+        select_action(prompt,list);
     } while (prompt != 'q' and prompt != 'Q');
 
 }
@@ -211,4 +137,83 @@ char prompt_user(){
     std::cin >> prompt;
 
     return prompt;
+}
+
+void select_action(const char &prompt,std::vector<int> &list){
+
+    switch (prompt){
+        case 'p': //intentional to achieve p OR P
+        case 'P':
+            // case p or P - print
+            if (!list.empty()){
+                std::cout << "[ ";
+                for (auto element: list)
+                    std::cout << element << " ";
+                std::cout << "]" << std::endl;
+            } else
+                std::cout << "[] - the list is empty" << std::endl;
+            break;
+        case 'a': 
+        case 'A':{ //brackets needed to declare the scope for the number variable    
+            // case a or A - add
+            std::cout << "Provide a number: ";
+            int number {};
+            std::cin >> number;
+            list.push_back(number);
+            std::cout << number << " added" << std::endl;
+            break;
+        } 
+        case 'm': 
+        case 'M':{
+            // case m or M - mean
+            if (!list.empty()){
+                int running_sum {};
+                for (auto element: list)
+                    running_sum += element;
+                // std::cout << std::fixed << std::setprecision(2); //Optional to set the precion of the output
+                std::cout << static_cast<double>(running_sum) / list.size() << std::endl; // (double) / (int) = (double)
+            } else
+                std::cout << "Unable to calculate the mean - no data" << std::endl;
+            break;
+        }
+        case 's': 
+        case 'S':{
+            // case s or S - smallest
+            if (!list.empty()){
+                int smallest {INT_MAX};
+                int index {};
+                int i {};
+                for (auto element: list){
+                    index = (element < smallest)?i:index; // if element is smaller then assign new index else keep the old one
+                    smallest = (element < smallest)?element:smallest;
+                    ++i;
+                }
+                std::cout << smallest << " at [" << index << "]" << std::endl;
+            } else
+                std::cout << "Unable to determine the smallest number - list is empty" << std::endl;
+            break;
+        }
+        case 'l': 
+        case 'L':
+            // case l or L - largest
+            if (!list.empty()){
+                int largest {}, index {}, i{};
+                for (auto element: list){
+                    index = (element > largest)?i:index;
+                    largest = (element > largest)?element:largest;
+                    ++i;
+                }
+                std::cout << largest << " at [" << index << "]" << std::endl;
+            } else
+                std::cout << "Unable to determine the largest number - list is empty" << std::endl;
+            break;
+        case 'q': 
+        case 'Q':
+            // case q or Q - quit
+            std::cout << "Goodbye" << std::endl;
+            break;
+        default:
+            std::cout << "Unknown selection, please try again" << std::endl;
+    }
+
 }
