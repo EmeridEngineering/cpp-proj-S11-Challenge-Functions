@@ -107,6 +107,7 @@ void add(std::vector<int> &list);
 int prompt_number();
 double mean(const std::vector<int> &list);
 int smallest(const std::vector<int> &list);
+int largest(const std::vector<int> &list);
 
 int main() {
     
@@ -173,16 +174,7 @@ void select_action(const char &prompt,std::vector<int> &list){
         case 'l': 
         case 'L':
             // case l or L - largest
-            if (!list.empty()){
-                int largest {}, index {}, i{};
-                for (auto element: list){
-                    index = (element > largest)?i:index;
-                    largest = (element > largest)?element:largest;
-                    ++i;
-                }
-                std::cout << largest << " at [" << index << "]" << std::endl;
-            } else
-                std::cout << "Unable to determine the largest number - list is empty" << std::endl;
+            largest(list);
             break;
         case 'q': 
         case 'Q':
@@ -251,4 +243,20 @@ int smallest(const std::vector<int> &list){
         std::cout << "Unable to determine the smallest number - list is empty" << std::endl;
 
     return smallest;
+}
+
+int largest(const std::vector<int> &list){
+    int largest {};
+    if (!list.empty()){
+        int index {}, i{};
+        for (auto element: list){
+            index = (element > largest)?i:index;
+            largest = (element > largest)?element:largest;
+            ++i;
+        }
+        std::cout << largest << " at [" << index << "]" << std::endl;
+    } else
+        std::cout << "Unable to determine the largest number - list is empty" << std::endl;
+    
+    return largest;
 }
