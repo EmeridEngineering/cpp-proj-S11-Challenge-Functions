@@ -100,6 +100,7 @@ Good luck!
 #include <climits>
 
 void start_program();
+char prompt_user();
 
 int main() {
     
@@ -114,16 +115,7 @@ void start_program() {
     std::vector<int> list {};
     char prompt {};
     do {
-        std::cout << "---------------------" << std::endl
-            << "Command list: " << std::endl
-            << "P - Print numbers" << std::endl
-            << "A - Add a number" << std::endl
-            << "M - Display mean of the numbers" << std::endl
-            << "S - Display the smallest number" << std::endl
-            << "L - Display the largest number" << std::endl
-            << "Q - Quit" << std::endl
-            << "\nSelect a command: ";
-        std::cin >> prompt;
+        prompt = prompt_user();
 
         switch (prompt){
             case 'p': //intentional to achieve p OR P
@@ -202,4 +194,21 @@ void start_program() {
 
     } while (prompt != 'q' and prompt != 'Q');
 
+}
+
+char prompt_user(){
+
+    char prompt {};
+    std::cout << "---------------------" << std::endl
+            << "Command list: " << std::endl
+            << "P - Print numbers" << std::endl
+            << "A - Add a number" << std::endl
+            << "M - Display mean of the numbers" << std::endl
+            << "S - Display the smallest number" << std::endl
+            << "L - Display the largest number" << std::endl
+            << "Q - Quit" << std::endl
+            << "\nSelect a command: ";
+    std::cin >> prompt;
+
+    return prompt;
 }
