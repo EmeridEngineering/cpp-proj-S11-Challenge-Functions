@@ -151,11 +151,7 @@ void select_action(const char &prompt,std::vector<int> &list){
         case 'a': 
         case 'A':{ //brackets needed to declare the scope for the number variable    
             // case a or A - add
-            std::cout << "Provide a number: ";
-            int number {};
-            std::cin >> number;
-            list.push_back(number);
-            std::cout << number << " added" << std::endl;
+            add(list);
             break;
         } 
         case 'm': 
@@ -221,4 +217,12 @@ void print(const std::vector<int> &list){
         std::cout << "]" << std::endl;
     } else
         std::cout << "[] - the list is empty" << std::endl;
+}
+
+void add(std::vector<int> &list){
+    std::cout << "Provide a number: ";
+    int number {};
+    std::cin >> number;
+    list.push_back(number);
+    std::cout << number << " added" << std::endl;
 }
