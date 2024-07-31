@@ -99,8 +99,18 @@ Good luck!
 #include <iomanip>
 #include <climits>
 
+void start_program();
+
 int main() {
     
+    start_program();
+    
+    std::cout << std::endl;
+    return 0;
+}
+
+void start_program() {
+
     std::vector<int> list {};
     char prompt {};
     do {
@@ -191,7 +201,5 @@ int main() {
         }
 
     } while (prompt != 'q' and prompt != 'Q');
-    
-    std::cout << std::endl;
-    return 0;
+
 }
