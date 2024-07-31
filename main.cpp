@@ -103,6 +103,8 @@ void start_program();
 char prompt_user();
 void select_action(const char &prompt,std::vector<int> &list);
 void print(const std::vector<int> &list);
+void add(std::vector<int> &list);
+int prompt_number();
 
 int main() {
     
@@ -220,9 +222,15 @@ void print(const std::vector<int> &list){
 }
 
 void add(std::vector<int> &list){
+    int number = prompt_number();
+    list.push_back(number);
+    std::cout << number << " added" << std::endl;
+}
+
+int prompt_number(){
     std::cout << "Provide a number: ";
     int number {};
     std::cin >> number;
-    list.push_back(number);
-    std::cout << number << " added" << std::endl;
+
+    return number;
 }
