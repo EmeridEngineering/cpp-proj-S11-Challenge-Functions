@@ -102,6 +102,7 @@ Good luck!
 void start_program();
 char prompt_user();
 void select_action(const char &prompt,std::vector<int> &list);
+void print(const std::vector<int> &list);
 
 int main() {
     
@@ -145,13 +146,7 @@ void select_action(const char &prompt,std::vector<int> &list){
         case 'p': //intentional to achieve p OR P
         case 'P':
             // case p or P - print
-            if (!list.empty()){
-                std::cout << "[ ";
-                for (auto element: list)
-                    std::cout << element << " ";
-                std::cout << "]" << std::endl;
-            } else
-                std::cout << "[] - the list is empty" << std::endl;
+            print(list);
             break;
         case 'a': 
         case 'A':{ //brackets needed to declare the scope for the number variable    
@@ -216,4 +211,14 @@ void select_action(const char &prompt,std::vector<int> &list){
             std::cout << "Unknown selection, please try again" << std::endl;
     }
 
+}
+
+void print(const std::vector<int> &list){
+    if (!list.empty()){
+        std::cout << "[ ";
+        for (auto element: list)
+            std::cout << element << " ";
+        std::cout << "]" << std::endl;
+    } else
+        std::cout << "[] - the list is empty" << std::endl;
 }
