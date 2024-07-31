@@ -105,6 +105,7 @@ void select_action(const char &prompt,std::vector<int> &list);
 void print(const std::vector<int> &list);
 void add(std::vector<int> &list);
 int prompt_number();
+double mean(const std::vector<int> &list);
 
 int main() {
     
@@ -159,14 +160,7 @@ void select_action(const char &prompt,std::vector<int> &list){
         case 'm': 
         case 'M':{
             // case m or M - mean
-            if (!list.empty()){
-                int running_sum {};
-                for (auto element: list)
-                    running_sum += element;
-                // std::cout << std::fixed << std::setprecision(2); //Optional to set the precion of the output
-                std::cout << static_cast<double>(running_sum) / list.size() << std::endl; // (double) / (int) = (double)
-            } else
-                std::cout << "Unable to calculate the mean - no data" << std::endl;
+            mean(list);
             break;
         }
         case 's': 
@@ -233,4 +227,21 @@ int prompt_number(){
     std::cin >> number;
 
     return number;
+}
+
+double mean(const std::vector<int> &list){
+    double mean {};
+    if (!list.empty()){
+        int running_sum {};
+        for (auto element: list)
+            running_sum += element;
+        // std::cout << std::fixed << std::setprecision(2); //Optional to set the precion of the output
+        mean = static_cast<double>(running_sum) / list.size();
+        std::cout << mean << std::endl; // (double) / (int) = (double)
+    } else{
+        mean = 0;
+        std::cout << "Unable to calculate the mean - no data" << std::endl;
+    }
+
+    return mean;
 }
