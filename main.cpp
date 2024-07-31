@@ -106,6 +106,7 @@ void print(const std::vector<int> &list);
 void add(std::vector<int> &list);
 int prompt_number();
 double mean(const std::vector<int> &list);
+int smallest(const std::vector<int> &list);
 
 int main() {
     
@@ -166,18 +167,7 @@ void select_action(const char &prompt,std::vector<int> &list){
         case 's': 
         case 'S':{
             // case s or S - smallest
-            if (!list.empty()){
-                int smallest {INT_MAX};
-                int index {};
-                int i {};
-                for (auto element: list){
-                    index = (element < smallest)?i:index; // if element is smaller then assign new index else keep the old one
-                    smallest = (element < smallest)?element:smallest;
-                    ++i;
-                }
-                std::cout << smallest << " at [" << index << "]" << std::endl;
-            } else
-                std::cout << "Unable to determine the smallest number - list is empty" << std::endl;
+            smallest(list);
             break;
         }
         case 'l': 
@@ -244,4 +234,21 @@ double mean(const std::vector<int> &list){
     }
 
     return mean;
+}
+
+int smallest(const std::vector<int> &list){
+    int smallest {INT_MAX};
+    if (!list.empty()){
+        int index {};
+        int i {};
+        for (auto element: list){
+            index = (element < smallest)?i:index; // if element is smaller then assign new index else keep the old one
+            smallest = (element < smallest)?element:smallest;
+            ++i;
+        }
+        std::cout << smallest << " at [" << index << "]" << std::endl;
+    } else
+        std::cout << "Unable to determine the smallest number - list is empty" << std::endl;
+
+    return smallest;
 }
